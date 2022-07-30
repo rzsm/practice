@@ -1,0 +1,44 @@
+header {
+    width: 100%;
+    height: 5rem;
+    background-color: hsl(276, 98%, 18%);
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 6rem;
+    align-items: center;    
+}
+
+a {
+    color: white;
+}
+
+.title {
+    font-weight: 600;
+}
+
+.nav-bar {
+    width: 300px;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.logout-btn {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+}
+
+.main {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

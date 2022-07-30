@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { Outlet, Link } from 'react-router-dom';
+import styles from './App.module.css' 
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <>
+    <header>
+        <Link to="/"> <h1 className={styles.title}>React Auth </h1> </Link>
+        <nav>
+          <ul className={styles['nav-bar']}>
+            <li>
+              <Link to="/auth"> Login </Link>
+            </li>
+            <li>
+              <Link to="/profile"> Profile </Link>
+            </li>
+            <li>
+              <button className={styles['logout-btn']}>Logout</button>
+            </li>
+          </ul>
+        </nav>
       </header>
-    </div>
+      <main className={styles.main}>
+        <Outlet />
+      </main>
+
+    </>
   );
 }
 
