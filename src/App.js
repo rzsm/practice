@@ -5,7 +5,7 @@ function App() {
   return (
     <>
     <header>
-        <Link to="/"> <h1 className={styles.title}>React Auth </h1> </Link>
+        <Link to="/"> <h1 className={styles.logo}>React Auth </h1> </Link>
         <nav>
           <ul className={styles['nav-bar']}>
             <li>
