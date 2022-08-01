@@ -1,0 +1,17 @@
+.label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.input {
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    background-color: var(--xlight-of-primary);
+    padding: o.5rem;
+    height: 2rem;
+    border: none;
+}
+
+.input:focus {
+    background-color: var(--xlight-of-primary);
+}

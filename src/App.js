@@ -1,5 +1,6 @@
 import { Outlet, Link } from 'react-router-dom';
-import styles from './App.module.css' 
+import Button from './components/UI/Button';
+import styles from './App.module.css'; 
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
               <Link to="/profile"> Profile </Link>
             </li>
             <li>
-              <button className={styles['logout-btn']}>Logout</button>
+              <Button className={styles['logout-btn']}>Logout</Button>
             </li>
           </ul>
         </nav>
