@@ -1,0 +1,24 @@
+.title {
+    margin: 3.5rem auto;
+    font-weight: bold;
+    font-size: 4.5rem;
+}
+
+.input {
+    width: 95%;
+    max-width: 25rem;
+    border: 1px solid black;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    display: block;
+    margin: auto;
+    color: white;
+    background-color: var(--primary-color);
+    font-size: 1.1rem;    
+}
+
+.btn:hover {
+    background-color: hsl(276, 98%, 28%);
+}
