@@ -3,13 +3,15 @@
     box-shadow: 0px 1px 4px var(--dark-shadow-color);
     color: white;
     margin: 3rem auto;
-    width: 400px;
+    width: 95%;
+    max-width: 25rem;
 }
 
 .card-title {
     font-size: 1.4rem;
     font-weight: bold;
     margin: 1rem;
+    margin-bottom: 1.3rem;
     font-family:  -apple-system, BlinkMacSystemFont, 'Open Sans', 'Lato', 'sans-serif', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue'; 
 }
@@ -32,7 +34,7 @@
 }
 
 .input {
-    width: 90%;
+    width: 95%;
 }
 
 .last-input {
@@ -42,4 +44,12 @@
 .new-account {
     color: var(--medium-light-of-primary);
     margin: 1.5rem 0 0;
+    background-color: transparent;
+    border:none;
+    cursor: pointer;
+    font-size: medium;
+}
+
+.new-account:hover {
+    color: var(--light-of-primary);
 }

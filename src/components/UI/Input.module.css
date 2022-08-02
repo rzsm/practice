@@ -7,9 +7,10 @@
     margin-bottom: 1rem;
     border-radius: 5px;
     background-color: var(--xlight-of-primary);
-    padding: o.5rem;
-    height: 2rem;
+    padding: 0.25rem;
     border: none;
+    font-size: inherit;
+    min-height: 2rem;
 }
 
 .input:focus {

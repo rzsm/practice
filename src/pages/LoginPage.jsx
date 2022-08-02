@@ -6,13 +6,15 @@ import styles from './LoginPage.module.css'
 const LoginPage = () => {
     return (
         <Card className={styles.card}>
-            <p className={styles['card-title']}> Login </p>
+            <h1 className={styles['card-title']}> Login </h1>
             <form className={styles['login-form']}>
-                <Input label="Your Email" id="email" inputClass={styles.input}/>
-                <Input label="Your Password" id="password" inputClass={styles.input + ' ' + styles['last-input']}/>
+                <Input label="Your Email" id="email" required inputClass={styles.input}/>
+                <Input label="Your Password" id="password" required inputClass={styles.input + ' ' + styles['last-input']}/>
                 <Button className={styles['login-btn']}> Login </Button>
+                <button className={styles['new-account']} type="button">
+                    Create new accout
+                </button>
             </form>
-            <a className={styles['new-account']}>Create new accout</a>
         </Card>
     )
 }
