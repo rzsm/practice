@@ -1,11 +1,11 @@
 import { useState, useCallback, useEffect } from 'react'
 
-export default function useAsync(callback, dependecies=[]) {
+export default function useAsync(callback) {
     const [loading, setLoading] = useState(false)
     const [value, setValue] = useState()
     const [error, setError] = useState()
 
-    const memoizedCallback = useCallback(() => {
+    const asyncFn = () => {
         setLoading(true)
         setValue(undefined)
         setError(undefined)
@@ -13,12 +13,7 @@ export default function useAsync(callback, dependecies=[]) {
         .then(setValue)
         .catch(setError)
         .finally(() => setLoading(false))
-    }, dependecies)
+    }
 
-    useEffect(() => {
-        memoizedCallback()
-        }
-    , memoizedCallback)
-
-    return { loading, value, error }
+    return { loading, value, error, asyncFn }
 }
