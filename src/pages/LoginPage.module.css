@@ -53,3 +53,7 @@
 .new-account:hover {
     color: var(--light-of-primary);
 }
+
+.loading {
+    color: white;
+}
