@@ -1,8 +1,11 @@
 import { Outlet, Link } from 'react-router-dom';
+import { useLoggedIn } from './context/auth-context';
 import Button from './components/UI/Button';
 import styles from './App.module.css'; 
 
 function App() {
+  const loggedIn = useLoggedIn();
+  
   return (
     <>
     <header>
@@ -14,7 +17,7 @@ function App() {
             </li>
             <li>
               <Link to="/profile"> Profile </Link>
-            </li>
+            </li>            
             <li>
               <Button className={styles['logout-btn']}>Logout</Button>
             </li>

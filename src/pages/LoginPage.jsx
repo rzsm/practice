@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLoginHandler, useToken } from '../context/auth-context';
 import useToggle from "../hooks/useToggle";
 import useFetch from "../hooks/useFetch";
 import Card from "../components/UI/Card";
@@ -6,11 +7,16 @@ import Input from "../components/UI/Input";
 import Button from "../components/UI/Button";
 import styles from './LoginPage.module.css'
 
+let url ='';
 const LoginPage = () => {
-    const [isLogin, toggleLogin] = useToggle(true); 
+    const [isLoginForm, toggleLogin] = useToggle(true); 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();   
     const API_KEY = 'AIzaSyDkgsq8Ui7-n5sOgpLFcdxNoVEhAKmtEtE';
+    const loginHandler = useLoginHandler();
+    const token = useToken();   
+    
+
     // Create Sign-up related states and function using useFetch hook
     const {loading: signUpLoading, error: signUpError, value: SignUpResponse, asyncFn: signUp} 
     = useFetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`,
@@ -22,9 +28,22 @@ const LoginPage = () => {
             "returnSecureToken": true
         })
     })
+
+    // Create Sign-In related states and function using useFetch hook
+    const {loading: signInLoading, error: signInError, value: SignInResponse, asyncFn: signIn} 
+    = useFetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
+    {
+        method:"POST",
+        body : JSON.stringify({
+            email,
+            password,
+            "returnSecureToken": true
+        })
+    })
+  
     
     // Loading variaable based on loading states returned by useFetch for UX goal
-    let loading = signUpLoading;
+    let loading = signUpLoading || signInLoading;
 
     // Feedback user what was wrong
     let errMsg = "";
@@ -33,18 +52,30 @@ const LoginPage = () => {
             errMsg = signUpError.error.message ? signUpError.error.message : "Authentication Failed";
             alert(errMsg);
         }
-    }, [signUpError])
+        if (signInError) {
+            errMsg = signInError.error.message ? signInError.error.message : "Authentication Failed";
+            alert(errMsg);
+        }
 
-    // Handle Sign Up and Login
+    }, [signUpError, signInError])
+
+    // Set Token Context :
+    useEffect(() => {
+        if (SignInResponse) loginHandler(SignInResponse.idToken);   
+    },[SignInResponse])
+
+    
+    // Handle Sign Up and Login    
     const submitHandler = (event) => {
         event.preventDefault();
-        if (!isLogin) signUp();              
+        if (!isLoginForm) signUp();
+        if (isLoginForm) signIn();           
     }
     
     return (
         <Card className={styles.card}>
             <h1 className={styles['card-title']}> 
-                {isLogin ? "Login" : "Sign Up"} 
+                {isLoginForm ? "Login" : "Sign Up"} 
             </h1>
             <form className={styles['login-form']} onSubmit={submitHandler}>
                 <Input 
@@ -64,7 +95,7 @@ const LoginPage = () => {
                 />
                 {!loading &&
                     <Button className={styles['login-btn']}> 
-                        {isLogin ? "Login" : "Create Account"} 
+                        {isLoginForm ? "Login" : "Create Account"} 
                     </Button>
                 }
                 {loading && <p className={styles.loading}>Sending Request ... </p>}              
@@ -73,7 +104,7 @@ const LoginPage = () => {
                     type="button" 
                     onClick={toggleLogin}
                 >                    
-                    {isLogin ? "Create new account" : "Login with existing account"}
+                    {isLoginForm ? "Create new account" : "Login with existing account"}
                 </button>
             
 
