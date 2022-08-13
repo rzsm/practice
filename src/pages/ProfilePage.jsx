@@ -29,6 +29,7 @@ export default function ProfilePage() {
         event.preventDefault();
         changePasswordRequest();
     }
+    
     return (
     <section style={{"textAlign":"center"}}>
         <h1 className={styles.title}>Your User Profile</h1>

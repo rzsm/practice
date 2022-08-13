@@ -1,24 +1,27 @@
 import { useEffect, useState } from 'react';
 import { useLoginHandler, useToken } from '../context/auth-context';
+import { useNavigate } from 'react-router-dom';
 import useToggle from "../hooks/useToggle";
 import useFetch from "../hooks/useFetch";
 import Card from "../components/UI/Card";
 import Input from "../components/UI/Input";
 import Button from "../components/UI/Button";
-import styles from './LoginPage.module.css'
+import styles from './LoginPage.module.css';
+
+const API_KEY = 'AIzaSyDkgsq8Ui7-n5sOgpLFcdxNoVEhAKmtEtE';
 
 let url ='';
 const LoginPage = () => {
     const [isLoginForm, toggleLogin] = useToggle(true); 
     const [email, setEmail] = useState();
-    const [password, setPassword] = useState();   
-    const API_KEY = 'AIzaSyDkgsq8Ui7-n5sOgpLFcdxNoVEhAKmtEtE';
+    const [password, setPassword] = useState();  
     const loginHandler = useLoginHandler();
-    const token = useToken();   
-    
+    const token = useToken();  
+    const navigate = useNavigate();
+
 
     // Create Sign-up related states and function using useFetch hook
-    const {loading: signUpLoading, error: signUpError, value: SignUpResponse, asyncFn: signUp} 
+    const {loading: signUpLoading, error: signUpError, value: SignUpValue, asyncFn: signUp} 
     = useFetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`,
     {
         method:"POST",
@@ -30,7 +33,7 @@ const LoginPage = () => {
     })
 
     // Create Sign-In related states and function using useFetch hook
-    const {loading: signInLoading, error: signInError, value: SignInResponse, asyncFn: signIn} 
+    const {loading: signInLoading, error: signInError, value: SignInValue, asyncFn: signIn} 
     = useFetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
     {
         method:"POST",
@@ -42,7 +45,7 @@ const LoginPage = () => {
     })
   
     
-    // Loading variaable based on loading states returned by useFetch for UX goal
+    // Loading variable based on loading states returned by useFetch for UX goal
     let loading = signUpLoading || signInLoading;
 
     // Feedback user what was wrong
@@ -63,8 +66,13 @@ const LoginPage = () => {
 
     // Set Token Context :
     useEffect(() => {
-        if (SignInResponse) loginHandler(SignInResponse.idToken);   
-    },[SignInResponse])
+        if (SignInValue) {
+            loginHandler(SignInValue.idToken); 
+            navigate('/', {
+                replace: true
+            })
+        }  
+    },[SignInValue])
 
     
     // Handle Sign Up and Login    
