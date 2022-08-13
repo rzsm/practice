@@ -48,12 +48,14 @@ const LoginPage = () => {
     // Feedback user what was wrong
     let errMsg = "";
     useEffect(() => {
-        if (signUpError) {
-            errMsg = signUpError.error.message ? signUpError.error.message : "Authentication Failed";
+        if (signInError) {
+            errMsg = (signInError && signInError.error && signInError.error.message) 
+            ? signInError.error.message : "Authentication Failed";
             alert(errMsg);
         }
-        if (signInError) {
-            errMsg = signInError.error.message ? signInError.error.message : "Authentication Failed";
+        else if (signUpError) {
+            errMsg = (signUpError && signUpError.error && signUpError.error.message)
+            ? signUpError.error.message : "Authentication Failed";
             alert(errMsg);
         }
 

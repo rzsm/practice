@@ -22,3 +22,7 @@
 .btn:hover {
     background-color: hsl(276, 98%, 28%);
 }
+
+.loading {
+    color: white;
+}

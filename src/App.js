@@ -1,10 +1,11 @@
 import { Outlet, Link } from 'react-router-dom';
-import { useLoggedIn } from './context/auth-context';
+import { useLoggedIn, useLogoutHandler } from './context/auth-context';
 import Button from './components/UI/Button';
 import styles from './App.module.css'; 
 
 function App() {
   const loggedIn = useLoggedIn();
+  const logoutHandler = useLogoutHandler();
   
   return (
     <>
@@ -12,15 +13,21 @@ function App() {
         <Link to="/"> <h1 className={styles.logo}>React Auth </h1> </Link>
         <nav>
           <ul className={styles['nav-bar']}>
+            {!loggedIn &&
             <li>
               <Link to="/auth"> Login </Link>
             </li>
+            }
+            {loggedIn &&
             <li>
-              <Link to="/profile"> Profile </Link>
-            </li>            
+            <Link to="/profile"> Profile </Link>
+            </li> 
+            }
+            {loggedIn &&
             <li>
-              <Button className={styles['logout-btn']}>Logout</Button>
+              <Button className={styles['logout-btn']} onClick={logoutHandler}>Logout</Button>
             </li>
+            }
           </ul>
         </nav>
       </header>
