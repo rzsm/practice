@@ -1,42 +1,27 @@
-import { Outlet, Link } from 'react-router-dom';
-import { useLoggedIn, useLogoutHandler } from './context/auth-context';
-import Button from './components/UI/Button';
-import styles from './App.module.css'; 
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import HomepageBody from './pages/HomepageBody';
+import LoginPage from './pages/LoginPage';
+import ProfilePage from './pages/ProfilePage';
+import Layout from './components/Layout';
+import { useLoggedIn } from './context/auth-context';
 
-function App() {
+const App = () => {
   const loggedIn = useLoggedIn();
-  const logoutHandler = useLogoutHandler();
-  
-  return (
-    <>
-    <header>
-        <Link to="/"> <h1 className={styles.logo}>React Auth </h1> </Link>
-        <nav>
-          <ul className={styles['nav-bar']}>
-            {!loggedIn &&
-            <li>
-              <Link to="/auth"> Login </Link>
-            </li>
-            }
-            {loggedIn &&
-            <li>
-            <Link to="/profile"> Profile </Link>
-            </li> 
-            }
-            {loggedIn &&
-            <li>
-              <Button className={styles['logout-btn']} onClick={logoutHandler}>Logout</Button>
-            </li>
-            }
-          </ul>
-        </nav>
-      </header>
-      <main className={styles.main}>
-        <Outlet />
-      </main>
 
-    </>
-  );
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}> 
+          <Route path="auth" element={<LoginPage />} />
+          <Route path="profile" element={
+            loggedIn ? <ProfilePage /> : <Navigate to="/auth" replace />} 
+          />  
+          <Route index element={ <HomepageBody />} />           
+        </Route>                 
+      </Routes>    
+    </BrowserRouter>
+  )
 }
 
 export default App;
+
