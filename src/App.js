@@ -12,11 +12,14 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}> 
-          <Route path="auth" element={<LoginPage />} />
+          <Route path="auth" element={
+            !loggedIn ? <LoginPage /> : <Navigate to="/" replace />} 
+          /> 
           <Route path="profile" element={
             loggedIn ? <ProfilePage /> : <Navigate to="/auth" replace />} 
           />  
-          <Route index element={ <HomepageBody />} />           
+          <Route index element={ <HomepageBody />} />  
+          <Route path='*' element={<Navigate to="/" replace />}/>         
         </Route>                 
       </Routes>    
     </BrowserRouter>

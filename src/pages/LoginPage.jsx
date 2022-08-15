@@ -67,10 +67,12 @@ const LoginPage = () => {
     // Set Token Context :
     useEffect(() => {
         if (SignInValue) {
-            loginHandler(SignInValue.idToken); 
-            navigate('/', {
-                replace: true
-            })
+            if(SignInValue.idToken){
+                loginHandler(SignInValue.idToken); 
+                navigate('/', {
+                    replace: true
+                })  
+            }          
         }  
     },[SignInValue])
 

@@ -22,10 +22,16 @@ export const useLogoutHandler = () => {
 }
 
 export const AuthProvider = (props) => {
-    const [token, setToken] = React.useState(null)
+    const [token, setToken] = React.useState(() => localStorage.getItem('token'))
     const loggedIn = !!token
-    const logoutHandler = () => setToken(null)
-    const loginHandler = (tkn) => setToken(tkn)
+    const logoutHandler = () => {
+        setToken(null)
+        localStorage.removeItem('token')
+    }
+    const loginHandler = (token) => {
+        setToken(token)
+        localStorage.setItem('token', token)
+    }
 
     return (
         <TokenContext.Provider value={token}>
