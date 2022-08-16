@@ -66,9 +66,10 @@ const LoginPage = () => {
 
     // Set Token Context :
     useEffect(() => {
-        if (SignInValue) {
+        if (SignInValue) {            
             if(SignInValue.idToken){
-                loginHandler(SignInValue.idToken); 
+                const expiration = new Date(new Date().getTime() + (+SignInValue.expiresIn) * 1000).toISOString();
+                loginHandler(SignInValue.idToken, expiration);                
                 navigate('/', {
                     replace: true
                 })  
