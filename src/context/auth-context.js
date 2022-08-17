@@ -23,17 +23,21 @@ export const useLogoutHandler = () => {
 
 let logoutTimerId;
 
+// Calculate remaing duration of token validity expiration 
 const calcRemainingDuration = (expirationTime) => {
     const current = new Date().getTime();
+    // expirationTime is in ISOString form so we use it as the Date parameter:
     const expirationTimeStamp = new Date(expirationTime).getTime();
     return expirationTimeStamp - current;
 }
 
-const initializeTokenData = () => {  
+// Login automatically whenever the URL changes
+// Login remains active only if token has not expired
+const retrieveTokenData = () => {  
     const storedToken = localStorage.getItem('token')
     const expiration = localStorage.getItem('expirationTime')
     const remaingDuration = calcRemainingDuration(expiration);
-    
+     
     if (remaingDuration > 60000) {
         return (
             {
@@ -49,7 +53,7 @@ const initializeTokenData = () => {
 }
 
 export const AuthProvider = (props) => {
-    const tokenData = initializeTokenData();
+    const tokenData = retrieveTokenData();
     const initializedToken = tokenData ? tokenData.token : null
     const [token, setToken] = React.useState(initializedToken)
 
@@ -69,6 +73,7 @@ export const AuthProvider = (props) => {
         logoutTimerId = setTimeout(logoutHandler, calcRemainingDuration(expiration));
     }
 
+    // When an auto log-in occurs, start a timer until the token expires
     useEffect(() => {
         if (logoutTimerId) {
             clearTimeout(logoutTimerId)
