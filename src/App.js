@@ -20,7 +20,7 @@ const App = () => {
 		<div className="App">
 			<h1>React Animations</h1>
 			<Modal show={isModalOpen} close={closeModal} />
-			<Backdrop show={isModalOpen} />
+			{isModalOpen ? <Backdrop show={isModalOpen} /> : null}
 			<button className="Button" onClick={showModal}>
 				Open Modal
 			</button>
