@@ -9,10 +9,10 @@ export default function MainNavigation() {
 			<nav>
 				<ul className={classes.nav}>
 					<li>
-						<Link to="/users">users</Link>
+						<Link to="/users">Users</Link>
 					</li>
 					<li>
-						<Link to="/admin">admin</Link>
+						<Link to="/admin">Admin</Link>
 					</li>
 					<li>
 						<Button className={classes.btn}>Logout</Button>

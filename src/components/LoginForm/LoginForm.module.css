@@ -1,0 +1,54 @@
+.login {
+	width: 80%;
+	max-width: 40rem;
+	margin: 4rem auto;
+	padding: 2rem;
+}
+
+.control {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 1rem;
+}
+
+.control input {
+    flex: 3;
+} 
+
+.control label {
+    flex: 1;
+} 
+
+.actions {
+    text-align: center;
+}
+
+.btn {
+	background-color: #dd0db0;
+	border: none;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+.btn:hover {
+	background-color: hsl(313, 89%, 36%);
+	border: none;
+}
+
+button:disabled,
+button:hover:disabled,
+button:focus:disabled {
+	background-color: #cbb3c6;
+	border: none;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+	cursor: not-allowed;
+}
+
+@media (min-width: 768px) {
+  .control {
+    align-items: center;
+    flex-direction: row;
+  }
+
+}
