@@ -3,6 +3,7 @@
 	max-width: 40rem;
 	margin: 4rem auto;
 	padding: 2rem;
+	background-color: #cbb3c6;
 }
 
 .control {
@@ -29,6 +30,7 @@
 	border: none;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     color: white;
+	
 }
 
 .btn:hover {
@@ -36,14 +38,6 @@
 	border: none;
 }
 
-button:disabled,
-button:hover:disabled,
-button:focus:disabled {
-	background-color: #cbb3c6;
-	border: none;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-	cursor: not-allowed;
-}
 
 @media (min-width: 768px) {
   .control {

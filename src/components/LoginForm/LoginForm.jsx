@@ -1,27 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../context/auth-context';
 import Card from '../UI/Card';
+import Button from '../UI/Button';
 import classes from './LoginForm.module.css';
 
 export default function LoginForm(props) {
     const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [isFormValid, setIsFormValid] = useState()
+    const [password, setPassword] = useState('') 
+	const ctx = useContext(AuthContext) 
+	const navigate = useNavigate()  
 
-    useEffect(() => {
-        if (!(email.includes('@') && password.length > 6)){
-            setIsFormValid(false)
-        }
-        else {
-            setIsFormValid(true)
-        }
-        
-    },[email, password])
-
-    
+	const submitHandler = (e) => {
+		e.preventDefault();
+		if (email.includes('@') && password.length > 5) {
+			ctx.onLogin()
+			navigate('/')
+		} 
+	}    
 
   return (
 		<Card className={classes.login}>
-			<form>
+			<form onSubmit={submitHandler}>
 				<div className={classes.control}>
 					<label htmlFor="email">Email: </label>
 					<input id="email" onChange={(e) => setEmail(e.target.value)} />
@@ -31,9 +31,9 @@ export default function LoginForm(props) {
 					<input id="password" onChange={(e) => setPassword(e.target.value)} />
 				</div>
 				<div className={classes.actions}>
-					<button className={classes.btn} disabled={!isFormValid}>
+					<Button className={classes.btn}>
 						Login
-					</button>
+					</Button>
 				</div>
 			</form>
 		</Card>
