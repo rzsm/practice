@@ -6,8 +6,7 @@ import Layout from "./components/Layout/Layout"
 
 
 export default function App() {
-	const ctx = useContext(AuthContext)
-	console.log(ctx.isLoggedIn)
+	const ctx = useContext(AuthContext)	
 
 	return (
 		<BrowserRouter>
