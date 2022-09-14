@@ -1,0 +1,26 @@
+.card {
+	max-width: 45rem;
+	width: 90%;
+    /* default position is static and 
+    z-index has no effect when the positoin is stati */
+	position: relative;
+    margin-top: -10rem;
+	z-index: 40;
+    margin-inline: auto;
+	background-color: #383838;
+	color: white;
+	text-align: center;
+	padding: 2rem;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    box-shadow: 1px 18px 10px rgba(0, 0, 0, 0.25);
+}
+
+.card h2 {
+	margin-bottom: 1rem;
+	font-size: 2rem;
+}
+
+.card p {
+	margin-top: 0.5rem;
+	line-height: 1rem;
+}

@@ -1,0 +1,18 @@
+.form button {
+    display: block ;
+    padding: 0.25rem 1.5rem;
+    background-color: #7F2607;
+    border-radius: 15px;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    margin-left: auto;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+}
+
+.form button:hover, .form button:active {
+    background-color: #631e06;
+} 
