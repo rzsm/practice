@@ -1,5 +1,7 @@
-// React
+// React Hooks
 import { useState } from 'react';
+// Context
+import CartContextProvider from './contexts/CartContextProvider';
 // Components
 import Header from "./components/Layout/Header";
 import Meals from "./components/Meals/Meals";
@@ -16,16 +18,12 @@ function App() {
     setCartIsShown(false)
   }
 
-  // Managing cart visibility state here and pass it through props drilling instead of context:
-  // Smart choice for Modal Backdrop onClick configurability
-  // Fine for HeaderCartButton button onClick since it's just two levels of components
-
   return (
-    <>
+    <CartContextProvider>
       {cartIsShown && <Cart onClose={hideCartHandler}/>}
       <Header onShowCart={showCartHandler} />
       <Meals />
-    </>
+    </CartContextProvider>
   );
 }
 
