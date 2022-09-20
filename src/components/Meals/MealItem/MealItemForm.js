@@ -9,19 +9,20 @@ const MealItemForm = (props) => {
 	const [isValidAmount, setIsValidAmount] = useState(true)
 	const amountInputRef = useRef()
 
-	const addItemHandler = (event) => {
+	const submitHandler = (event) => {
 		event.preventDefault()
-		const inputAmount = +amountInputRef.current.value
+		const inputAmount = amountInputRef.current.value
+		const inputAmountNumber = +inputAmount
 
-		if (inputAmount < 1 || inputAmount > 5) {
+		if (inputAmount.trim().length === 0 || inputAmountNumber < 1 || inputAmountNumber > 5) {
 			setIsValidAmount(false)
 			return
 		}
-		props.onAddItem(inputAmount)
+		props.onAddItem(inputAmountNumber)
 	}
 
 	return (
-		<form className={classes.form} onSubmit={addItemHandler}>
+		<form className={classes.form} onSubmit={submitHandler}>
 			<Input
 				ref={amountInputRef}
 				label="Amount"

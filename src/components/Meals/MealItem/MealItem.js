@@ -13,6 +13,7 @@ const MealItem = (props) => {
 
 	const addItemHandler = amount => {
 		cartCtx.addItem({
+			id: props.id,
 			name: props.name,
 			price: props.price,
 			amount: amount

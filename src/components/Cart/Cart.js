@@ -11,10 +11,25 @@ import classes from "./Cart.module.css"
 const Cart = (props) => {
 	const cartCtx = useContext(CartContext)
 	const isCartEmpty = !cartCtx.items.length
+	const cartItemRemoveHandler = (id) => {
+		cartCtx.removeItem(id)
+	}
+
+	const cartItemAddHandler = (item) => {
+		cartCtx.addItem({ ...item, amount: 1 })
+	}
+	
 	const cartItems = cartCtx.items.map((item) => (
-		<CartItem key={item.id} item={item} />
+		<CartItem
+			key={item.id}
+			item={item}
+			onRemove={cartItemRemoveHandler.bind(null, item.id)}
+			onAdd={cartItemAddHandler.bind(null, item)}
+		/>
 	))
 	const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`
+	// To show the order button only if the cart is not empty
+	const hasItems = cartCtx.items.length > 0
 
 	return (
 		<Modal onClose={props.onClose}>
@@ -27,7 +42,7 @@ const Cart = (props) => {
 				<button className={classes["button--alt"]} onClick={props.onClose}>
 					Close
 				</button>
-				<button className={classes.button}>Order</button>
+				{hasItems && <button className={classes.button}>Order</button>}
 			</div>
 		</Modal>
 	)
