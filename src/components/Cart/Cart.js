@@ -33,7 +33,7 @@ const Cart = (props) => {
 
 	return (
 		<Modal onClose={props.onClose}>
-			{!isCartEmpty && cartItems}
+			{!isCartEmpty && <ul className={classes['cart-items']}>{cartItems}</ul>}
 			<div className={classes.total}>
 				<span>Total Amount</span>
 				<span>{totalAmount}</span>

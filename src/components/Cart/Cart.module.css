@@ -4,7 +4,13 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin-top: 1.5rem;
 	margin-bottom: 1rem;
+}
+
+.cart-items {
+	max-height: 20rem;
+	overflow-y: scroll;
 }
 
 .actions {
@@ -22,6 +28,13 @@
     margin-left: 1rem;
     text-align: center;  
 	cursor: pointer;  
+}
+
+.actions button:hover,
+.actions button:active {
+    background-color: #5a1a01;
+    border-color: #5a1a01;
+    color: white;
 }
 
 .button--alt {
