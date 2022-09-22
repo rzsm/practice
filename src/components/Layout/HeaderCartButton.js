@@ -1,5 +1,5 @@
 // React
-import { useContext } from "react"
+import { useContext, useState, useEffect } from "react"
 // Context
 import CartContext from "../../contexts/cart-context"
 // Components
@@ -8,13 +8,27 @@ import CartIcon from "../Cart/CartIcon"
 import classes from "./HeaderCartButton.module.css"
 
 const HeaderCartButton = (props) => {
+	const [needsBumpingStyle, setNeedsBumpingStyle] = useState(true);	
     const cartCtx = useContext(CartContext);
-    const totalItems = cartCtx.items.reduce((currentNumber, item) => {
+	const { items } = cartCtx	
+    const totalItems = items.reduce((currentNumber, item) => {
         return currentNumber + item.amount
     }, 0)
 
+	const buttonClasses = `${classes.button} ${needsBumpingStyle ? classes.bump : ' '}`
+
+	// Managing Bumping style addition and removement whenever items are changed
+	useEffect(() => {
+		setNeedsBumpingStyle(true);
+		const timer = setTimeout(() => setNeedsBumpingStyle(false), 300)
+
+		return () => {
+			clearTimeout(timer)
+		}
+	},[items])
+
 	return (
-		<button className={classes.button} onClick={props.onShowCart}>
+		<button className={buttonClasses} onClick={props.onShowCart}>
 			<span className={classes.icon}>
 				<CartIcon />
 			</span>
